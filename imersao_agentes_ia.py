@@ -52,9 +52,9 @@ llm = ChatGoogleGenerativeAI(model=MODEL, temperature=TEMPERATURE, api_key=GEMIN
 #testando o modelo do Gemini 2.5
 #perg_test = "Qual a temperatura máxima que fará hoje em São Paulo?"
 #resp_test = llm.invoke(perg_test)
-#print("\nPergunta: "+perg_test)
-#print("Resposta: "+resp_test.content+"\n")
-#print("==============================================================================================================\n")
+#logging.info("\nPergunta: "+perg_test)
+#logging.info("Resposta: "+resp_test.content+"\n")
+#logging.info("==============================================================================================================\n")
 
 #criando o prompt do sistema
 TRIAGEM_PROMPT = (
@@ -110,9 +110,9 @@ testes = ["Posso reembolsar a internet? ",
 
 #fazendo a iteração por For para chamar as perguntas do teste
 #for msg_teste in testes:
-#  print(f"Pergunta: {msg_teste}")
-#  print(f"Resposta: {triagem(msg_teste)}\n")
-#  print("==============================================================================================================\n")
+#  logging.info(f"Pergunta: {msg_teste}")
+#  logging.info(f"Resposta: {triagem(msg_teste)}\n")
+#  logging.info("==============================================================================================================\n")
 
 
 """
@@ -140,10 +140,10 @@ for n in Path(PATH_DOC).glob("*.pdf"):
        docs.extend(loader.load())
        #print(f"Documento {n.name} carregado com sucesso.")
     except Exception as e:
-       print(f"Erro ao carregar o Documento {n.name}: {e}")
+       logging.error(f"Erro ao carregar o Documento {n.name}: {e}")
 
 if not docs:
-    raise ValueError("Nenhum documento PDF foi encontrado ou carregado com sucesso. "
+    logging.error("Nenhum documento PDF foi encontrado ou carregado com sucesso. "
                      "Verifique o caminho em PATH_DOC e se os arquivos na pasta não estão corrompidos.")
 
 #carregando biblioteca para quebrar os documentos em pedaços menores
@@ -154,8 +154,8 @@ chunks = splitter.split_documents(docs)
 
 
 #for chunk in chunks:
-#    print(chunk)
-#    print("-------------------------------------------------------------------------------------------------------\n")
+#    logging.info(chunk)
+#    logging.info("-------------------------------------------------------------------------------------------------------\n")
 
 #carregando a biblioteca para criar os embeddings 
 from langchain_google_genai import GoogleGenerativeAIEmbeddings
@@ -242,14 +242,14 @@ testes02 = ["Posso reembolsar a internet ? ",
 
 #for msg_teste in testes02:
     #resposta = perguntar_politica_RAG(msg_teste)
-    #print(f"PERGUNTA: {msg_teste}")
-    #print(f"RESPOSTA: {resposta['answer']}\n")
+    #logging.info(f"PERGUNTA: {msg_teste}")
+    #logging.info(f"RESPOSTA: {resposta['answer']}\n")
     #if resposta['contexto_encontrado']:
-        #print("CITAÇÕES")
+        #logging.info("CITAÇÕES")
         #for c in resposta['citacoes']:
-            #print(f"- Documento: {c['documento']} - Página: {c['pagina']}")
-            #print(f"  Trecho: {c['trecho']}\n")
-        #print("=========================================================================================================")
+            #logging.info(f"- Documento: {c['documento']} - Página: {c['pagina']}")
+            #logging.info(f"  Trecho: {c['trecho']}\n")
+        #logging.info("=========================================================================================================")
 
 """
 AULA 03 - Criando o agente de triagem + consulta a documentos com Gemini 2.5 + Embeddings
