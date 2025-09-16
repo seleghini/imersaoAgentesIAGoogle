@@ -153,9 +153,9 @@ splitter = RecursiveCharacterTextSplitter(chunk_size=300, chunk_overlap=30)
 chunks = splitter.split_documents(docs)
 
 
-#for chunk in chunks:
-#    logging.info(chunk)
-#    logging.info("-------------------------------------------------------------------------------------------------------\n")
+for chunk in chunks:
+    logging.info(chunk)
+    logging.info("-------------------------------------------------------------------------------------------------------\n")
 
 #carregando a biblioteca para criar os embeddings 
 from langchain_google_genai import GoogleGenerativeAIEmbeddings
