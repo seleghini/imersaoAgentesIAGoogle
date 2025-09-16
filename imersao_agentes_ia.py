@@ -37,11 +37,11 @@ temperature_str = os.getenv('TEMPERATURE')
 
 #verificação se as chaves foram carregadas corretamente
 if not GEMINI_API_KEY:
-    raise ValueError("A variável de ambiente GEMINI_API_KEY não foi encontrada. Verifique seu arquivo .env")
+    logging.error("A variável de ambiente GEMINI_API_KEY não foi encontrada. Verifique seu arquivo .env")
 if not MODEL:
-    raise ValueError("A variável de ambiente MODEL não foi encontrada. Verifique seu arquivo .env")
+    logging.error("A variável de ambiente MODEL não foi encontrada. Verifique seu arquivo .env")
 if not temperature_str:
-    raise ValueError("A variável de ambiente TEMPERATURE não foi encontrada. Verifique seu arquivo .env")
+    logging.error("A variável de ambiente TEMPERATURE não foi encontrada. Verifique seu arquivo .env")
 
 # Convertendo a temperatura para float
 TEMPERATURE = float(temperature_str)
